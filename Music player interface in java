@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+import java.util.List;
+
+interface MusicPlayer {
+    void play();
+    void pause();
+    void stop();
+    void addSong(String song);
+    void removeSong(String song);
+}
+
+class MyMusicPlayer implements MusicPlayer {
+    private List<String> playlist;
+
+    public MyMusicPlayer() {
+        this.playlist = new ArrayList<>();
+    }
+
+    @Override
+    public void play() {
+        if (!playlist.isEmpty()) {
+            System.out.println("Playing: " + playlist.get(0));
+        } else {
+            System.out.println("Playlist is empty. Add songs first.");
+        }
+    }
+
+    @Override
+    public void pause() {
+        System.out.println("Pausing the current song.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Stopping the current song.");
+    }
+
+    @Override
+    public void addSong(String song) {
+        playlist.add(song);
+        System.out.println("Added: " + song + " to the playlist.");
+    }
+
+    @Override
+    public void removeSong(String song) {
+        if (playlist.contains(song)) {
+            playlist.remove(song);
+            System.out.println("Removed: " + song + " from the playlist.");
+        } else {
+            System.out.println("Song not found in the playlist.");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyMusicPlayer musicPlayer = new MyMusicPlayer();
+
+        // Add songs to the playlist
+        musicPlayer.addSong("Song1");
+        musicPlayer.addSong("Song2");
+        musicPlayer.addSong("Song3");
+        musicPlayer.addSong("Song4");
+        musicPlayer.addSong("Song5");
+
+        // Play, pause, remove, and stop songs
+        musicPlayer.play();
+        musicPlayer.pause();
+        musicPlayer.removeSong("Song3");
+        musicPlayer.stop();
+    }
+}
